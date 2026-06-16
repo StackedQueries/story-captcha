@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>STORYPROOF · prove you're human by writing</title>
+  <meta name="description" content="A keystroke-biometric CAPTCHA: write a tiny story, and the rhythm of your typing proves you're human." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="wrap">
+    <div class="brand"><span class="dot"></span> STORYPROOF · keystroke-biometric captcha</div>
+    <h1>Write a tiny story to prove you're human.</h1>
+    <p class="sub">
+      No puzzles, no traffic lights. Just write ~100 characters on the prompt below.
+      It isn't <em>what</em> you write that proves you're human — it's the rhythm of
+      <em>how</em> you type it. Pasting, autofill, and scripted input are rejected.
+    </p>
+
+    <section class="card">
+      <div class="prompt-label">Your prompt — write a short story about</div>
+      <p class="prompt">“<span class="topic" id="topic">…</span>”</p>
+      <button class="refresh" id="refresh" type="button">↻ new prompt</button>
+
+      <textarea
+        id="story"
+        placeholder="Start typing your story here… (write naturally — backspaces and pauses are fine)"
+        spellcheck="true"
+        autocomplete="off"
+        autocapitalize="sentences"
+        maxlength="140"></textarea>
+
+      <div class="meter-row">
+        <span>Aim for ~100 characters. <span class="hint">min 70</span></span>
+        <span class="count" id="count">0 / 100</span>
+      </div>
+      <div class="bar"><i id="bar"></i></div>
+
+      <div class="rating" id="rating">
+        <label for="rate" class="rate-label" id="rateLabel">Rate this CAPTCHA
+          <span class="hint" id="rateHint">1 = hostile · 10 = delightful</span></label>
+        <div class="rate-row">
+          <input type="range" id="rate" min="1" max="10" value="10" step="1"
+            aria-label="Rate this CAPTCHA from 1 to 10" />
+          <output id="rateOut" class="rate-out">10</output>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="primary" id="verify" type="button" disabled>Verify I'm human</button>
+        <span class="hint" id="status">Keep writing…</span>
+      </div>
+
+      <div class="verdict" id="verdict">
+        <div class="verdict-head">
+          <span class="verdict-tag" id="vtag">—</span>
+          <span class="score-num" id="vscore">0</span>
+          <span class="hint">/ 100 humanness</span>
+        </div>
+        <div class="signals" id="signals"></div>
+      </div>
+    </section>
+
+    <p class="footnote">
+      STORYPROOF scores behavioral biometrics entirely in your browser — keystroke
+      dwell/flight, rollover, cognitive pauses, corrections, mouse-path curvature
+      and velocity, the timing between every interaction, and input provenance.
+      Nothing is uploaded. See <a href="SPEC.md">SPEC.md</a> for the full design and
+      thresholds, grounded in keystroke- and mouse-dynamics research.
+    </p>
+  </main>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
